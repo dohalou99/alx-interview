@@ -1,30 +1,25 @@
-def generate_pascals_triangle(n):
-    """
-    Generate Pascal's triangle up to the nth row.
+#!/usr/bin/python3
+'''A module for generating Pascal's triangle.
 
-    Args:
-    - n: An integer representing the number of rows in Pascal's triangle.
+This module provides a function to generate Pascal's triangle up to the nth row,
+represented as a list of lists of integers.
 
-    Returns:
-    - A list of lists representing Pascal's triangle.
-    """
-    pascals_triangle = []
+'''
 
-    if not isinstance(n, int) or n <= 0:
-        return pascals_triangle
+def pascal_triangle(n):
+    '''Creates a list of lists of integers representing
+    the Pascal's triangle of a given integer.
+    '''
+    triangle = []
+    if type(n) is not int or n <= 0:
+        return triangle
+    for i in range(n):
+        line = []
+        for j in range(i + 1):
+            if j == 0 or j == i:
+                line.append(1)
+            elif i > 0 and j > 0:
+                line.append(triangle[i - 1][j - 1] + triangle[i - 1][j])
+        triangle.append(line)
+    return triangle
 
-    for row in range(n):
-        current_row = []
-        for position in range(row + 1):
-            if position == 0 or position == row:
-                current_row.append(1)
-            else:
-                previous_row = pascals_triangle[row - 1]
-                current_value = previous_row[position - 1] + previous_row[position]
-                current_row.append(current_value)
-        pascals_triangle.append(current_row)
-
-    return pascals_triangle
-
-# Example usage:
-print(generate_pascals_triangle(5))
