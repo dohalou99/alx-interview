@@ -2,22 +2,31 @@
 '''A Coding challenge.
 '''
 def minOperations(n):
-    if n == 1:
-        return 0  # No operations needed for 1 H
-    if n < 1 or n % 2 != 0:
-        return 0  # It's impossible to achieve odd number of Hs
+"""
+    Determines the fewest number of operations
+    needed to achieve exactly n H characters in a file.
 
-    dp = [0] * (n + 1)
+    Args:
+        n (int): Number of characters to be achieved.
 
-    for i in range(2, n + 1, 2):
-        dp[i] = float('inf')
-        for j in range(1, i // 2 + 1):
-            if i % j == 0:
-                dp[i] = min(dp[i], dp[j] + 2 + i // j - 1)
+    Returns:
+        int: The minimum number of operations required.
+    """
 
-    return dp[n] if dp[n] != float('inf') else 0
+    now = 1  # Current number of characters in the file
+    start = 0  # Starting number of characters for each round of operations
+    counter = 0  # Total number of operations
 
-# Example usage
-n = 9
-print(minOperations(n))  # Output: 6
+    while now < n:
+        remainder = n - now
 
+        # Check if the remainder is divisible by the current number of characters
+        if remainder % now == 0:
+            start = now
+            now += start
+            counter += 2  # Copy all and paste operations
+        else:
+            now += start
+            counter += 1  # Only paste operation
+
+    return counter
