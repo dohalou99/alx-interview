@@ -2,6 +2,7 @@
 """
 Define isWineer function, a solution to the Prime Game problem
 """
+
 def is_prime(n):
     """ Checks if a number given n is a prime number """
     for i in range(2, int(n ** 0.5) + 1):
@@ -22,11 +23,13 @@ def calculate_primes(n, primes):
 
 
 def isWinner(x, nums):
-    """
-    x is the number of rounds and nums is an array of n
-    Return: name of the player that won the most rounds
-    If the winner cannot be determined, return None
-    You can assume n and x will not be larger than 10000
+      """
+    Determines winner of Prime Game
+    Args:
+        x (int): no. of rounds of game
+        nums (int): upper limit of range for each round
+    Return:
+        Name of winner (Maria or Ben) or None if winner cannot be found
     """
 
     players_wins = {"Maria": 0, "Ben": 0}
